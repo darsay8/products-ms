@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -40,9 +40,14 @@ public class Product {
     @Column(name = "sku", nullable = false, unique = true)
     private String sku;
 
-    @Column(name = "created_date", nullable = false)
-    private LocalDate createdDate;
-
     @Column(name = "brand")
     private String brand;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

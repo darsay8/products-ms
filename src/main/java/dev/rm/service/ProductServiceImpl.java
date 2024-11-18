@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import dev.rm.model.Product;
 import dev.rm.repository.ProductRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +29,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        product.setCreatedDate(LocalDate.now());
         return productRepository.save(product);
     }
 
