@@ -62,6 +62,8 @@ public class ProductController {
 
             Product newProduct = ProductFactory.createProduct(
                     product.getName(),
+                    product.getDescription(),
+                    product.getImageUrl(),
                     product.getSku(),
                     product.getPrice(),
                     product.getStock(),

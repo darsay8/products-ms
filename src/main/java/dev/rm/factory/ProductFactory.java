@@ -7,10 +7,12 @@ import dev.rm.model.Product;
 
 public class ProductFactory {
 
-    public static Product createProduct(String name, String sku, BigDecimal price, Integer stock, Category category,
-            String brand) {
+    public static Product createProduct(String name, String description, String imageUrl,
+            String sku, BigDecimal price, Integer stock, Category category, String brand) {
         return Product.builder()
                 .name(name)
+                .description(description)
+                .imageUrl(imageUrl)
                 .sku(sku)
                 .price(price)
                 .stock(stock)
