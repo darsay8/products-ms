@@ -1,5 +1,6 @@
 package dev.rm.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -117,6 +118,25 @@ public class ProductController {
         } catch (RuntimeException e) {
             log.error("Error deleting product with id {}: {}", id, e.getMessage());
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/products/by-ids")
+    public ResponseEntity<List<Product>> getProductsByIds(@RequestBody List<Long> productIds) {
+        try {
+
+            List<Product> products = productService.getProductsByIds(productIds);
+
+            if (products.isEmpty()) {
+                log.info("No products found for the given IDs.");
+                return ResponseEntity.notFound().build(); // No products found
+            }
+
+            log.info("Returning {} products.", products.size());
+            return ResponseEntity.ok(products); // Return the list of products
+        } catch (Exception e) {
+            log.error("Error fetching products: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Server error
         }
     }
 }
